@@ -158,10 +158,6 @@ tests = [
         'tests/test_cbuf.c',
         'src/control_event.c'
     ]],
-    ['test_control_event_queue', [
-        'tests/test_control_event_queue.c',
-        'src/control_event.c'
-    ]],
     ['test_control_event_serialize', [
         'tests/test_control_event_serialize.c',
         'src/control_event.c'
