@@ -154,6 +154,10 @@ executable('scrcpy', src,
 ### TESTS
 
 tests = [
+    ['test_cbuf', [
+        'tests/test_cbuf.c',
+        'src/control_event.c'
+    ]],
     ['test_control_event_queue', [
         'tests/test_control_event_queue.c',
         'src/control_event.c'
