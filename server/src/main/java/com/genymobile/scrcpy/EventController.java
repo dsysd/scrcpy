@@ -12,11 +12,11 @@ import android.view.MotionEvent;
 
 import java.io.IOException;
 
-
 public class EventController {
 
     private final Device device;
     private final DesktopConnection connection;
+    private final EventSender sender;
 
     private final KeyCharacterMap charMap = KeyCharacterMap.load(KeyCharacterMap.VIRTUAL_KEYBOARD);
 
@@ -28,6 +28,7 @@ public class EventController {
         this.device = device;
         this.connection = connection;
         initPointer();
+        sender = new EventSender(connection);
     }
 
     private void initPointer() {
@@ -60,6 +61,10 @@ public class EventController {
         while (true) {
             handleEvent();
         }
+    }
+
+    public EventSender getSender() {
+        return sender;
     }
 
     private void handleEvent() throws IOException {
@@ -97,7 +102,7 @@ public class EventController {
 
     private boolean injectChar(char c) {
         String decomposed = KeyComposition.decompose(c);
-        char[] chars = decomposed != null ? decomposed.toCharArray() : new char[] {c};
+        char[] chars = decomposed != null ? decomposed.toCharArray() : new char[]{c};
         KeyEvent[] events = charMap.getEvents(chars);
         if (events == null) {
             return false;
